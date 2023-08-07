@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css.css">
+    <title>E-commerce Website</title>
+</head>
+<body>
+    <header>
+        <h1>My E-commerce Site</h1>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <div class="dropdown">
+                <a href="#">Categories</a>
+                <div class="dropdown-content">
+                    <a href="#">Electronics</a>
+                    <a href="#">Books</a>
+                    <a href="#">Clothing</a>
+                </div>
+            </div>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    
+    <div class="products">
+        <!-- Example products -->
+        <div class="product">Product 1</div>
+        <div class="product">Product 2</div>
+        <div class="product">Product 3</div>
+        <div class="product">Product 4</div>
+        <!-- Add more products as needed -->
+    </div>
+
+    <!-- AI Feature Front End -->
+    <div id="chat-container">
+        <div id="messages"></div>
+        <textarea id="user-input"></textarea>
+        <button onclick="sendMessage()">Send</button>
+    </div>
+    <script>
+        async function sendMessage() {
+            const inputField = document.getElementById("user-input");
+            const messagesDiv = document.getElementById("messages");
+    
+            // Display user's message
+            messagesDiv.innerHTML += `<div>User: ${inputField.value}</div>`;
+    
+            try {
+                const response = await fetch('/get-response', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: inputField.value })
+                });
+    
+                const data = await response.json();
+                messagesDiv.innerHTML += `<div>Bot: ${data.reply}</div>`;
+                inputField.value = ''; // Clear the input
+            } catch (error) {
+                console.error("Error sending message:", error);
+            }
+        }
+    </script>
+</body>
+</html>
