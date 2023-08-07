@@ -3,7 +3,7 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 // Middleware
 app.use(bodyParser.json());
@@ -29,6 +29,11 @@ app.post('/get-response', async (req, res) => {
         res.status(500).json({ error: "Failed to get a response from the bot" });
     }
 });
+
+app.get('/', (req, res) => {
+    res.send('Welcome to the OpenAI API integration server!');
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
