@@ -22,7 +22,6 @@ def create_app():
         app.config.from_object("app.config.TestingConfig")
     # initializes the database connection for the app
     db.init_app(app)
-    app.register_blueprint(database)
     with app.app_context():
         jwt = JWTManager(app)
 
