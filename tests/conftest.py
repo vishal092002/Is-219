@@ -2,8 +2,8 @@
 # pylint: disable=redefined-outer-name
 
 import pytest
-from app import create_app, db
-from database.app import User
+from app import create_app
+from database.app import User, db
 
 
 @pytest.fixture()

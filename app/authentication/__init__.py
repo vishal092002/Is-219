@@ -11,7 +11,7 @@ from marshmallow import Schema, fields, EXCLUDE
 from database.app import db
 from database.app import User
 
-authentication = Blueprint('authentication', __name__, url_prefix="/", description="Operations on users")
+authentication_blueprint = Blueprint('authentication', __name__, url_prefix="/", description="Operations on users")
 
 
 class RegisterUserSchema(Schema):
@@ -60,9 +60,9 @@ class JWTSchema(Schema):
     expires = fields.Str()
 
 
-@authentication.route('/register', methods=['POST'])
-@authentication.arguments(RegisterUserSchema, location="json")
-@authentication.response(201, RegisterUserResponseSchema)
+@authentication_blueprint.route('/register', methods=['POST'])
+@authentication_blueprint.arguments(RegisterUserSchema, location="json")
+@authentication_blueprint.response(201, RegisterUserResponseSchema)
 def register(data):
     """Register a User
 
@@ -89,9 +89,9 @@ def register(data):
 
 # Create a route to authenticate your users and return JWTs. The
 # create_access_token() function is used to actually generate the JWT.
-@authentication.route("/auth", methods=["POST"])
-@authentication.arguments(LoginUserSchemaPost, location="json")
-@authentication.response(201, JWTSchema)
+@authentication_blueprint.route("/auth", methods=["POST"])
+@authentication_blueprint.arguments(LoginUserSchemaPost, location="json")
+@authentication_blueprint.response(201, JWTSchema)
 def login(data):
     username = data['username']
     password = data['password']
@@ -109,8 +109,8 @@ def login(data):
                        expires=datetime.fromtimestamp(pure_decoded["exp"]).strftime('%Y-%m-%d %H:%M:%S')), 200
 
 
-@authentication.route("/user_info", methods=["GET"])
-@authentication.doc(security=[{"bearerAuth": []}])
+@authentication_blueprint.route("/user_info", methods=["GET"])
+@authentication_blueprint.doc(security=[{"bearerAuth": []}])
 @jwt_required()
 def protected():
     # We can now access our sqlalchemy User object via `current_user`.
