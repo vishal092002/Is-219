@@ -39,7 +39,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: vishal092002/jwt1
+          images: vishal092002/is219final
 
       - name: Build and push
         uses: docker/build-push-action@v2
