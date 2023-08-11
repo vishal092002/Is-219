@@ -1,8 +1,8 @@
 # Is-219
- Our final p[ropject is a ecommerce website. 
+ Our final p[oject is a ecommerce website. 
 Team Members: 
   1. Vishal 
-  2. Boovan
+  2. Bovan
   3. Fahad
 
 Video Link: 
