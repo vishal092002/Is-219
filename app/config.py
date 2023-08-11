@@ -25,7 +25,8 @@ class Config(object):
     OPENAPI_SWAGGER_UI_URL = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
 
 class ProductionConfig(Config):
-    pass
+     ENV = "production"
+    # pass
 
 
 class DevelopmentConfig(Config):
